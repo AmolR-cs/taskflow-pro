@@ -12,6 +12,13 @@ import Task from "./models/Task.js";
 dotenv.config();
 
 const app = express();
+app.get("/test", (req, res) => {
+  res.send("TEST WORKING 🔥");
+});
+
+app.get("/api/auth/test", (req, res) => {
+  res.send("AUTH WORKING 🔥");
+});
 
 /* ================= MIDDLEWARE ================= */
 app.use(
