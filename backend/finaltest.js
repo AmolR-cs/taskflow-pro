@@ -16,7 +16,10 @@ const app = express();
 /* ================= MIDDLEWARE ================= */
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://your-frontend-url.vercel.app",
+    ],
     credentials: true,
   })
 );
@@ -224,8 +227,15 @@ app.get("/api/projects", protect, async (req, res) => {
 /* ================= CREATE TASK ================= */
 app.post("/api/tasks", protect, async (req, res) => {
   try {
-    const { title, description, priority, deadline, status, assignedTo, project } =
-      req.body;
+    const {
+      title,
+      description,
+      priority,
+      deadline,
+      status,
+      assignedTo,
+      project,
+    } = req.body;
 
     if (!title || !project || !deadline) {
       return res.status(400).json({
@@ -307,7 +317,9 @@ app.get("/api/dashboard", protect, async (req, res) => {
     const totalTasks = await Task.countDocuments();
 
     const completedTasks = await Task.countDocuments({ status: "done" });
-    const inProgressTasks = await Task.countDocuments({ status: "in-progress" });
+    const inProgressTasks = await Task.countDocuments({
+      status: "in-progress",
+    });
     const todoTasks = await Task.countDocuments({ status: "todo" });
 
     const highPriority = await Task.countDocuments({ priority: "high" });
@@ -325,13 +337,9 @@ app.get("/api/dashboard", protect, async (req, res) => {
 
     res.json({
       success: true,
-
-      // Simple frontend-friendly values
       totalProjects,
       totalTasks,
       completedTasks,
-
-      // Advanced data
       dashboard: {
         overview: {
           totalProjects,
@@ -363,11 +371,10 @@ mongoose
   .then(() => {
     console.log("MongoDB Connected ✅");
 
-    
-      const PORT = process.env.PORT || 5002;
+    const PORT = process.env.PORT || 5002;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT} ✅`);
+    });
   })
   .catch((err) => console.log(err));
