@@ -16,11 +16,8 @@ const app = express();
 /* ================= MIDDLEWARE ================= */
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://your-frontend-url.vercel.app",
-    ],
-    credentials: true,
+    origin: "*"
+      
   })
 );
 
