@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import authRoutes from "./routes/authRoutes.js";
+
 import User from "./models/User.js";
 import Project from "./models/Project.js";
 import Task from "./models/Task.js";
@@ -13,6 +13,11 @@ dotenv.config();
 
 const app = express();
 
+/* ================= MIDDLEWARE ================= */
+app.use(cors({ origin: "*" }));
+app.use(express.json());
+
+/* ================= ROOT ================= */
 app.get("/", (req, res) => {
   res.send("TaskFlow Pro API running ✅");
 });
@@ -21,38 +26,9 @@ app.get("/test", (req, res) => {
   res.send("TEST WORKING ✅");
 });
 
-app.post("/api/auth/register", async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.json({ success: false, message: "User already exists" });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({
-      name,
-      email,
-      password: hashedPassword,
-    });
-
-    await newUser.save();
-
-    res.json({ success: true, message: "User registered successfully ✅" });
-  } catch (err) {
-    res.json({ success: false, message: err.message });
-  }
+app.get("/api/auth/test", (req, res) => {
+  res.send("Auth API working ✅");
 });
-/* ================= MIDDLEWARE ================= */
-app.use(cors({
-    origin: "*"
-      
-  }));
-
-app.use(express.json());
-app.use("/api/auth", authRoutes);
 
 /* ================= AUTH MIDDLEWARE ================= */
 const protect = async (req, res, next) => {
@@ -102,16 +78,6 @@ const adminOnly = (req, res, next) => {
   }
   next();
 };
-
-/* ================= ROOT ================= */
-app.get("/test", (req, res) => {
-  res.send("Test route working ✅");
-});
-
-/* ================= AUTH TEST ================= */
-app.get("/api/auth/test", (req, res) => {
-  res.send("Auth API working ✅");
-});
 
 /* ================= REGISTER ================= */
 app.post("/api/auth/register", async (req, res) => {
