@@ -74,7 +74,7 @@ const adminOnly = (req, res, next) => {
 
 /* ================= ROOT ================= */
 app.get("/", (req, res) => {
-  res.send("TaskFlow Pro API running ✅");
+  res.send("TaskFlow Pro API running V2 ✅");
 });
 
 /* ================= AUTH TEST ================= */
