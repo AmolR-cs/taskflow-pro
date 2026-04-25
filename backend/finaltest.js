@@ -12,21 +12,27 @@ import Task from "./models/Task.js";
 dotenv.config();
 
 const app = express();
-app.get("/test", (req, res) => {
-  res.send("TEST WORKING 🔥");
+
+app.get("/", (req, res) => {
+  res.send("TaskFlow Pro API running ✅");
 });
 
-app.get("/api/auth/test", (req, res) => {
-  res.send("AUTH WORKING 🔥");
+app.get("/test", (req, res) => {
+  res.send("TEST WORKING ✅");
+});
+
+app.post("/api/auth/register", async (req, res) => {
+  res.json({
+    success: true,
+    message: "Register route working ✅",
+  });
 });
 
 /* ================= MIDDLEWARE ================= */
-app.use(
-  cors({
+app.use(cors({
     origin: "*"
       
-  })
-);
+  }));
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
