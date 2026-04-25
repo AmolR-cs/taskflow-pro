@@ -18,7 +18,7 @@ function Analytics() {
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
 
-  const API = "http://localhost:5002";
+  const API = "https://taskflow-pro-backend-9nxa.onrender.com";
   const getToken = () => localStorage.getItem("token");
 
   const fetchData = async () => {

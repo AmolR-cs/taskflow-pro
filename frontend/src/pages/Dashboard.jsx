@@ -37,7 +37,7 @@ function Dashboard() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get("http://localhost:5002/api/dashboard", {
+        const res = await axios.get("https://taskflow-pro-backend-9nxa.onrender.com/api/dashboard", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

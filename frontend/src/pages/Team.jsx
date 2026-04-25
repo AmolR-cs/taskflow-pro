@@ -9,7 +9,7 @@ function Team() {
   const [roleFilter, setRoleFilter] = useState("All");
   const [selectedMember, setSelectedMember] = useState(null);
 
-  const API = "http://localhost:5002";
+  const API = "https://taskflow-pro-backend-9nxa.onrender.com";
   const getToken = () => localStorage.getItem("token");
 
   const fetchData = async () => {

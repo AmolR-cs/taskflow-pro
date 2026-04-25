@@ -13,7 +13,7 @@ function Tasks() {
   const [deadline, setDeadline] = useState("");
   const [project, setProject] = useState("");
 
-  const API = "http://localhost:5002";
+  const API ="https://taskflow-pro-backend-9nxa.onrender.com";
   const getToken = () => localStorage.getItem("token");
 
   const showToast = (msg, type = "success") => {
