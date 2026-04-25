@@ -14,7 +14,7 @@ function Projects() {
   const [status, setStatus] = useState("planning");
   const [toast, setToast] = useState("");
 
-  const API = "https://taskflow-pro-backend-9nxa.onrender.com";;
+  const API = "https://taskflow-pro-backend-9xaa.onrender.com";
   const getToken = () => localStorage.getItem("token");
 
   const showToast = (msg) => {
