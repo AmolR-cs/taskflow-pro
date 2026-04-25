@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
+import authRoutes from "./routes/authRoutes.js";
 import User from "./models/User.js";
 import Project from "./models/Project.js";
 import Task from "./models/Task.js";
@@ -22,6 +22,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 
 /* ================= AUTH MIDDLEWARE ================= */
 const protect = async (req, res, next) => {
